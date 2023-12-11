@@ -2,6 +2,7 @@
 
 use App\Enums\SignatureStatus;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SignatureController;
 use App\Models\Plan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -31,28 +32,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/test', function() {
-
-    // $plan = Plan::create([
-    //     'name' => 'Gold',
-    //     'short_description' => 'O plano gold é o melhor',
-    //     'price' => '2000',
-    // ]);
-
-    // $client = Auth::user()->client()->create([
-    //     'document' => '02354789665',
-    //     'birthdate' => '1992-06-28',
-    // ]);
-
-    // $client->signatures()->create([
-    //     'plan_id' => $plan->id,
-    //     'status' => SignatureStatus::ACTIVATED,
-    // ]);
-
-
-    return view('test', $data = ['suco' => 'maracujá']);
-
-    // return 'teste';
-});
+Route::get('/teste', [SignatureController::class, 'index']);
 
 require __DIR__.'/auth.php';
