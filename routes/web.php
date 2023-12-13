@@ -42,7 +42,7 @@ Route::resource('plano', PlanController::class)
         TrustProxies::class,
         VerifyCsrfToken::class
     ])->parameters([
-        'plano' => 'plan'
+        'plano' => 'plan:cod'
     ])->missing(fn() => redirect()->route('plano.index'));
 
 require __DIR__.'/auth.php';
