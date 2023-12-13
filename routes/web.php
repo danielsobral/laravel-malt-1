@@ -1,8 +1,11 @@
 <?php
 
 use App\Enums\SignatureStatus;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SignatureController;
+use App\Http\Middleware\TrustProxies;
+use App\Http\Middleware\VerifyCsrfToken;
 use App\Models\Plan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -33,5 +36,13 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/teste', [SignatureController::class, 'index']);
+
+Route::resource('plano', PlanController::class)
+    ->withoutMiddleware([
+        TrustProxies::class,
+        VerifyCsrfToken::class
+    ])->parameters([
+        'plano' => 'plan'
+    ])->missing(fn() => redirect()->route('plano.index'));
 
 require __DIR__.'/auth.php';
