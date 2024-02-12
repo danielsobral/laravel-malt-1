@@ -38,11 +38,13 @@ Route::middleware('auth')->group(function () {
 Route::get('/teste', [SignatureController::class, 'index']);
 
 Route::resource('plano', PlanController::class)
-    ->withoutMiddleware([
-        TrustProxies::class,
-        VerifyCsrfToken::class
-    ])->parameters([
+    // ->withoutMiddleware([
+    //     TrustProxies::class,
+    //     VerifyCsrfToken::class
+    // ])
+    ->parameters([
         'plano' => 'plan:cod'
-    ])->missing(fn() => redirect()->route('plano.index'));
+    ]);
+    // ->missing(fn() => redirect()->route('plano.index'));
 
 require __DIR__.'/auth.php';
